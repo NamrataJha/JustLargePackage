@@ -1,9 +1,6 @@
-name: dotent-restore
+name: dotent
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
