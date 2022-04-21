@@ -28,17 +28,17 @@ jobs:
           sha: ${{ github.sha }}
       # Password encryption is not supported in MAC, Linux.
       - name: Add private GitHub registry to NuGet
-        run: dotnet nuget add source https://nuget.pkg.github.com/erdembayar/index.json -n GPR # -u erdembayar -p ${{ secrets.PUSH_TOKEN }} --store-password-in-clear-text
+        run: dotnet nuget add source https://nuget.pkg.github.com/namratajha/index.json -n GPR # -u namratajha -p ${{ secrets.PAT }} --store-password-in-clear-text
 
       - name: Push generated package to GitHub registry
         run: |
           for f in JustLargePackage/bin/Release/*.nupkg
           do
-            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PUSH_TOKEN }} #--skip-duplicate
+            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PAT }} #--skip-duplicate
           done
 
           for f in JustLargePackage/bin/Release/*.snupkg
           do
-            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PUSH_TOKEN }} #--skip-duplicate
+            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PAT }} #--skip-duplicate
           done
         shell: bash
