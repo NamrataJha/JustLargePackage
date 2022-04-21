@@ -32,12 +32,12 @@ jobs:
 
       - name: Push generated package to GitHub registry
         run: |
-          for f in erdemDevice/bin/Release/*.nupkg
+          for f in JustLargePackage/bin/Release/*.nupkg
           do
             dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PUSH_TOKEN }} #--skip-duplicate
           done
 
-          for f in erdemDevice/bin/Release/*.snupkg
+          for f in JustLargePackage/bin/Release/*.snupkg
           do
             dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PUSH_TOKEN }} #--skip-duplicate
           done
