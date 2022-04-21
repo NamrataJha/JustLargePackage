@@ -19,11 +19,11 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Build Nuget packages
-        run: dotnet build .\JustLargePackage\JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }}  --configuration Release --no-build
+        run: dotnet build .\JustLargePackage\JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }}  --configuration Release
         env:
           sha: ${{ github.sha }}
       - name: Create the nuget package
-        run: dotnet pack .\JustLargePackage\JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }} --configuration Release
+        run: dotnet pack .\JustLargePackage\JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }} --configuration Release --no-build
         env:
           sha: ${{ github.sha }}
       # Password encryption is not supported in MAC, Linux.
