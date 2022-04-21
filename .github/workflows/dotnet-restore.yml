@@ -24,10 +24,10 @@ jobs:
         env:
           sha: ${{ github.sha }}
       - name: Create the nuget package
-        run: dotnet pack .\JustLargePackage\JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }} --configuration Release --output bin/Release/Publish --no-build
+        run: dotnet pack .\JustLargePackage\JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }} --configuration Release --no-build
         env:
           sha: ${{ github.sha }}
       - name: Publish to GitHub
-        run: dotnet nuget push bin/Release/Publish/**/*.nupkg --api-key {{ secrets.PAT }}
+        run: dotnet nuget push JustLargePackage/bin/Release/*.nupkg --api-key {{ secrets.PAT }}
         env:
           sha: ${{ github.sha }}
