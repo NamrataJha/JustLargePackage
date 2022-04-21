@@ -27,7 +27,19 @@ jobs:
         run: dotnet pack .\JustLargePackage\JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }} --configuration Release --output bin/Release/Publish
         env:
           sha: ${{ github.sha }}
-      - name: Publish to GitHub
-        run: dotnet nuget push bin/Release/Publish/**/*.nupkg --skip-duplicate
-        env:
-          sha: ${{ github.sha }}
+      # Password encryption is not supported in MAC, Linux.
+      - name: Add private GitHub registry to NuGet
+        run: dotnet nuget add source https://nuget.pkg.github.com/erdembayar/index.json -n GPR # -u erdembayar -p ${{ secrets.PUSH_TOKEN }} --store-password-in-clear-text
+
+      - name: Push generated package to GitHub registry
+        run: |
+          for f in erdemDevice/bin/Release/*.nupkg
+          do
+            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PUSH_TOKEN }} #--skip-duplicate
+          done
+
+          for f in erdemDevice/bin/Release/*.snupkg
+          do
+            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PUSH_TOKEN }} #--skip-duplicate
+          done
+        shell: bash
