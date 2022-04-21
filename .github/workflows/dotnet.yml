@@ -16,7 +16,6 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0' # SDK Version to use.
-          source-url: https://nuget.pkg.github.com/erdembayar/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Build Nuget packages
