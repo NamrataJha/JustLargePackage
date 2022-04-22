@@ -1,9 +1,6 @@
 name: dotent-restore-push
 
 on:
-  push:
-    branches:
-      - main
   # Add Run workflow option in pipeline
   workflow_dispatch:
 

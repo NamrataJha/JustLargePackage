@@ -31,11 +31,11 @@ jobs:
         run: |
           for f in JustLargePackage/bin/Release/*.nupkg
           do
-            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PAT }} #--skip-duplicate
+            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{secrets.PAT}} #--skip-duplicate
           done
 
           for f in JustLargePackage/bin/Release/*.snupkg
           do
-            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{ secrets.PAT }} #--skip-duplicate
+            dotnet nuget push $f --source "GPR" --skip-duplicate --api-key ${{secrets.PAT}} #--skip-duplicate
           done
         shell: bash

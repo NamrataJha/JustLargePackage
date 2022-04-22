@@ -1,9 +1,6 @@
 name: dotent-restore
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -28,6 +25,6 @@ jobs:
         env:
           sha: ${{ github.sha }}
       - name: Publish to GitHub
-        run: dotnet nuget push JustLargePackage/bin/Release/*.nupkg --api-key {{ secrets.PAT }}
+        run: dotnet nuget push JustLargePackage/bin/Release/*.nupkg --api-key {{secrets.PAT}}
         env:
           sha: ${{ github.sha }}
