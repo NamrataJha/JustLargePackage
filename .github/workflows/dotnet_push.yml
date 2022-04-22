@@ -2,6 +2,8 @@ name: dotent-restore-push
 
 on:
   # Add Run workflow option in pipeline
+  push: 
+    main
   workflow_dispatch:
 
 jobs:
@@ -17,11 +19,11 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Build Nuget packages
-        run: dotnet build .\JustLargePackage\JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }}  --configuration Release
+        run: dotnet build ./JustLargePackage/JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }}  --configuration Release
         env:
           sha: ${{ github.sha }}
       - name: Create the nuget package
-        run: dotnet pack .\JustLargePackage\JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }} --configuration Release --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+        run: dotnet pack ./JustLargePackage/JustLargePackage.csproj -p:PackageVersion=1.0.0-${{ github.sha }} --configuration Release --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
         env:
           sha: ${{ github.sha }}
       # Password encryption is not supported in MAC, Linux.
